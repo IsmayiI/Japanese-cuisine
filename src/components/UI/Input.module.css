@@ -1,0 +1,18 @@
+.inputStyle {
+   display: flex;
+   align-items: center;
+   margin-bottom: 1rem;
+}
+
+.inputStyle label {
+   font-weight: bold;
+   margin-right: 1rem;
+}
+
+.inputStyle input {
+   width: 4rem;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   font: inherit;
+   padding-left: 1rem;
+}
