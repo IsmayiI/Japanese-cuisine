@@ -4,13 +4,13 @@ import styles from './MealItemForm.module.css'
 const { formStyle } = styles
 
 
-const MealItemForm = () => {
+const MealItemForm = ({ id }) => {
    return (
       <form className={formStyle}>
          <Input
             label="количество"
             input={{
-               id: 'amount',
+               id,
                type: "number",
                min: '1',
                step: '1',
