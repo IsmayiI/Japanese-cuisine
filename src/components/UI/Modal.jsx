@@ -5,9 +5,9 @@ const { backdrop, modal, content } = styles
 const portalElement = document.getElementById('overlays')
 
 
-const Backdrop = () => {
+const Backdrop = ({ onClick }) => {
    return (
-      <div className={backdrop}></div>
+      <div className={backdrop} onClick={onClick}></div>
    )
 }
 
@@ -24,7 +24,7 @@ const ModalWindow = (props) => {
 const Modal = (props) => {
    return (
       <>
-         {ReactDOM.createPortal(<Backdrop />, portalElement)}
+         {ReactDOM.createPortal(<Backdrop onClick={props.onHideCart} />, portalElement)}
          {ReactDOM.createPortal(<ModalWindow>{props.children}</ModalWindow>, portalElement)}
       </>
    )
