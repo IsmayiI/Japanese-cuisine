@@ -15,7 +15,7 @@ const Cart = ({ onHideCart }) => {
    }
 
    const removeCartItemHandler = (id) => {
-
+      cartContext.removeItem(id)
    }
 
    const cartItems = (
