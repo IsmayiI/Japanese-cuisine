@@ -1,17 +1,56 @@
-import DUMMY_MEALS from '../../data/dummy-meals'
+import { useEffect, useState } from 'react'
 import Card from '../UI/Card'
 import MealItem from './MealItem/MealItem'
-
+import spinner from '../../assets/spinner.svg'
 import styles from './MealList.module.css'
-const { meals } = styles
+const { meals, loading } = styles
 
 
 const MealList = () => {
+   const [mealsData, setMealsData] = useState([])
+   const [isLoading, setIsLoading] = useState(false)
+   const [error, setError] = useState(false)
 
-   const mealList = DUMMY_MEALS.map(meal => (
+   useEffect(() => {
+      const fetchData = async () => {
+         setIsLoading(true)
+         try {
+            const res = await fetch('https://react-http-7baee-default-rtdb.firebaseio.com/meals.json')
+            if (!res.ok) throw new Error('Что то пошло не так...')
+            const data = await res.json()
+            setMealsData(Object.entries(data))
+         } catch (e) {
+            setError(true)
+            console.log(e.message)
+         }
+         setIsLoading(false)
+      }
+      fetchData()
+   }, [])
+
+   if (error) {
+      return (
+         <section className={loading}>
+            <h2>Что то пошло не так...</h2>
+         </section>
+      )
+   }
+
+   if (isLoading) {
+      return (
+         <section className={loading}>
+            <img src={spinner} alt="#" />
+         </section>
+      )
+   }
+
+
+
+   const mealList = mealsData.map(meal => (
       <MealItem
-         key={meal.id}
-         {...meal}
+         key={meal[0]}
+         id={meal[0]}
+         {...meal[1]}
       />
    ))
 
